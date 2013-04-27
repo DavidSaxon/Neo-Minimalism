@@ -1,0 +1,10 @@
+
+
+------- OMICRON GAME ENGINE -------
+           By David Saxon
+___________________________________
+
+Usage:
+
+    --h     :   display this help text
+

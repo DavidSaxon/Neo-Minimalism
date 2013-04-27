@@ -1,0 +1,70 @@
+/******\
+| TODO |
+\******/
+
+-resource loader {
+
+    -free resources
+
+    -sound resources
+
+    -shader resources
+}
+
+-media manager {
+    
+    -can play multiple sounds at once
+
+    -can loop sounds
+
+    -play parts of sounds
+}
+
+-physics controller {
+    
+    -checks bounding shape collisions between physics objects
+
+    -if collision occurs call a function in the object
+}
+
+-exceptions {
+
+    -uninitialised exceptions {
+
+        -engine
+
+        -sub engines
+
+        -resource manager
+
+        -renderer
+    }
+
+    -resource exceptions {
+
+        -tag not found
+
+        -resource not loaded
+    }
+    
+    -loader exception {
+
+        -throw when model file fails to open
+
+        -throw when there is an error in the model file
+
+        -throw when png fails to load
+    }
+}
+
+-Utilities {
+    
+    -Vectors {
+
+        -dot product
+
+        -cross product
+
+        -angle bewteen
+    }
+}
