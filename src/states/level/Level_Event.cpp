@@ -32,6 +32,16 @@ void Level::onKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
             rightKey = true;
             break;
         }
+        case SDLK_SPACE: {
+
+            spaceKey = true;
+            break;
+        }
+        case SDLK_LCTRL: {
+
+            torpedoTime = !torpedoTime;
+            break;
+        }
     }
 
 }

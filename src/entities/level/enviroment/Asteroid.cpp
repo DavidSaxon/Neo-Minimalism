@@ -2,13 +2,16 @@
 
 //CONSTRUCTOR
 Asteroid::Asteroid(SharedShape s, const util::vec::Vector3D& p) :
-    asteroid(s),
-    pos(p) {
+    asteroid(s) {
+
+    pos = p;
+
+    hasNew = false;
+    shouldRemove = false;
 
     //create random rotation speeds
     rotSpeed.set((rand() % 100) / 400.0, (rand() % 100) / 400.0,
         (rand() % 100) / 400.0);
-
 }
 
 //DESTRUCTOR

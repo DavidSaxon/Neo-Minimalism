@@ -12,6 +12,8 @@
 #include "src/entities/level/back_ground/SpaceBox.hpp"
 #include "src/entities/level/enviroment/Asteroid.hpp"
 #include "src/entities/level/player/Player.hpp"
+#include "src/entities/level/weapons/PlayerLasor.hpp"
+#include "src/entities/level/weapons/PlayerTorpedo.hpp"
 #include "src/sub_engine/SubEngine.hpp"
 
 //TYPEDEF
@@ -51,6 +53,11 @@ private:
     bool downKey;
     bool leftKey;
     bool rightKey;
+    bool spaceKey;
+
+    bool torpedoTime;
+    bool fireLeft;
+    float lasorSpeed;
 
     //CONSTRUCTOR
     DISALLOW_COPY_AND_ASSIGN(Level);

@@ -45,6 +45,17 @@ void Renderer::render() {
         (*it)->render();
     }
 
+    //render transparent
+    // it = entityList->getRenderables().begin();
+    // for (; it != ite; ++it) {
+
+    //     (*it)->renderTransparent();
+    // }
+    for (int i = entityList->getRenderables().size() - 1; i >= 0; --i) {
+
+        entityList->getRenderables()[i]->renderTransparent();
+    }
+
     //swap the buffers
     SDL_GL_SwapBuffers();
 }

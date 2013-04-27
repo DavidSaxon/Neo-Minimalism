@@ -30,8 +30,6 @@ private:
     //VARIABLES
     //the shape for the asteroid
     SharedShape asteroid;
-    //the position of the asteroid
-    util::vec::Vector3D pos;
     //the rotation of the asteroid
     util::vec::Vector3D rot;
     //the rotation speeds of the asteroid

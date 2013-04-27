@@ -18,7 +18,8 @@ enum Group {
     LEVEL,
     BACK_GROUND,
     ASTEROID,
-    PLAYER
+    PLAYER,
+    LASOR
 };
 
 } //res

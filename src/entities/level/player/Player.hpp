@@ -21,7 +21,7 @@ public:
     const float maxSpeed;
 
     //CONSTRUCTOR
-    Player(SharedShape c);
+    Player(SharedShape c, SharedShape h);
 
     //DESTRUCTOR
     ~Player();
@@ -32,6 +32,9 @@ public:
 
     /*!Renders the player*/
     void render();
+
+    /*!Renders transparent shapes*/
+    void renderTransparent();
 
     /*!^INL
     @return the position of the player*/
@@ -62,9 +65,9 @@ private:
     //VARIABLES
     //the shape for the cockpit
     SharedShape cockpit;
+    //the shape for the cross hairs
+    SharedShape crossHair;
 
-    //the position of the player
-    util::vec::Vector3D pos;
     //the turn rotation of the player
     util::vec::Vector3D turnRot;
     //the tilt rotation of the player

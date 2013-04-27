@@ -3,8 +3,12 @@
 //CONSTRUCTOR
 TriangleCol::TriangleCol(const util::vec::Vector4D& col,
 	VertexCoords& vCoords) :
-	colour(col),
 	vertexCoords(vCoords) {
+
+	colour.setX(col.getX());
+	colour.setY(col.getY());
+	colour.setZ(col.getZ());
+	colour.setF(col.getF());
 }
 
 //DESTRUCTOR
@@ -14,12 +18,12 @@ TriangleCol::~TriangleCol() {
 //PUBLIC MEMBER FUNCTIONS
 void TriangleCol::draw() {
 
+	//make sure no textures are bound
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	//set the colour
 	glColor4f(colour.getX(), colour.getY(),
 		colour.getZ(), colour.getF());
-
-	//make sure no textures are bound
-	glBindTexture(GL_TEXTURE_2D, 0);
 
 	//start drawing triangles
 	glBegin(GL_TRIANGLES);

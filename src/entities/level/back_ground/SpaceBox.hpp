@@ -33,8 +33,6 @@ private:
     //VARIABLES
     //the space box
     SharedShape box;
-    //the position of the space box
-    util::vec::Vector3D pos;
 
     //CONSTRUCTOR
     DISALLOW_COPY_AND_ASSIGN(SpaceBox);

@@ -1,11 +1,15 @@
 #include "src/entities/level/player/Player.hpp"
 
 //CONSTRUCTOR
-Player::Player(SharedShape c) :
+Player::Player(SharedShape c, SharedShape h) :
     cockpit(c),
-    maxSpeed(0.02),
-    currentSpeed(0.02),
+    crossHair(h),
+    maxSpeed(0.03),
+    currentSpeed(0.03),
     turnSpeed(0.8) {
+
+    hasNew = false;
+    shouldRemove = false;
 }
 
 //DESTRUCTOR
@@ -27,7 +31,20 @@ void Player::render() {
 
     glLoadIdentity();
 
+    glTranslatef(0.0, 0.0, 0.45);
+
     cockpit->draw();
+
+    glPopMatrix();
+}
+
+void Player::renderTransparent() {
+
+    glPushMatrix();
+
+    glLoadIdentity();
+
+    crossHair->draw();
 
     glPopMatrix();
 }

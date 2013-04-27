@@ -34,7 +34,7 @@ public:
 
 	/*!^INL
 	@col the new colour for the triangle*/
-	void setColour(util::vec::Vector4D& col);
+	void setColour(util::vec::Vector4D col);
 
 private:
 
@@ -52,7 +52,7 @@ inline util::vec::Vector4D& TriangleCol::getColour() {
 	return colour;
 }
 
-inline void TriangleCol::setColour(util::vec::Vector4D& col) {
+inline void TriangleCol::setColour(util::vec::Vector4D col) {
 
 	colour = col;
 }

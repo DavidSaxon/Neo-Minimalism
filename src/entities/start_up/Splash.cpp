@@ -7,6 +7,9 @@ Splash::Splash(SharedShape s, SharedShape f) :
 	complete(false),
 	fade(1.0),
 	fadeAmount(0.5) {
+
+	hasNew = false;
+	shouldRemove = false;
 }
 
 //DESTRUCTOR

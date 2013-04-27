@@ -162,6 +162,33 @@ void ResourceManager::createResources() {
             "res/gfx/tex/level/player/cockpit.png", groups));
         textures.insert(std::make_pair("cockpit", t));
     }
+    //cross hair
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::PLAYER);
+        SharedTextureRes t(new TextureResource(
+            "res/gfx/tex/level/player/cross_hair.png", groups));
+        textures.insert(std::make_pair("cross_hair", t));
+    }
+    //player lasor
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::LASOR);
+        SharedTextureRes t(new TextureResource(
+            "res/gfx/tex/level/lasors/player_lasor.png", groups));
+        textures.insert(std::make_pair("player_lasor", t));
+    }
+    //player torpedo
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::LASOR);
+        SharedTextureRes t(new TextureResource(
+            "res/gfx/tex/level/lasors/player_torpedo.png", groups));
+        textures.insert(std::make_pair("player_torpedo", t));
+    }
 
 
 
@@ -238,5 +265,46 @@ void ResourceManager::createResources() {
             "res/gfx/shapes/level/player/cockpit.obj",
             "cockpit", groups));
         shapes.insert(std::make_pair("cockpit", s));
+    }
+    //cross hair
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::PLAYER);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/player/cross_hair.obj",
+            "cross_hair", groups));
+        shapes.insert(std::make_pair("cross_hair", s));
+    }
+    //player lasor
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::LASOR);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/lasors/player_lasor.obj",
+            "player_lasor", groups));
+        shapes.insert(std::make_pair("player_lasor", s));
+    }
+    //player torpedo
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::LASOR);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/lasors/player_torpedo.obj",
+            "player_torpedo", groups));
+        shapes.insert(std::make_pair("player_torpedo", s));
+    }
+    //player torpedo trail
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::LASOR);
+            util::vec::Vector4D col(0.0, 1.0, 1.0, 1.0);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/lasors/player_torpedo_trail.obj",
+            col, groups));
+        shapes.insert(std::make_pair("player_torpedo_trail", s));
     }
 }

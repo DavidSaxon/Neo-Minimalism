@@ -13,9 +13,17 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <stdlib.h>
+#include <vector>
 
 #include "src/Utilities/MacroUtil.hpp"
 #include "src/Utilities/vector/Vector3D.hpp"
+
+#include "src/resource/ResourceManager.hpp"	
+
+class Entity;
+
+typedef boost::shared_ptr<Entity> SharedEntity;
+typedef boost::shared_ptr<ResourceManager> SharedResourceManager;
 
 namespace ent {
 
@@ -32,6 +40,9 @@ namespace ent {
 class Entity {
 public:
 
+	bool shouldRemove;
+	bool hasNew;
+
 	//DESTRUCTOR
 	/*!Destroys the entity
 	^INL*/
@@ -45,12 +56,21 @@ public:
 	/*!^INL
 	@return the type of entity this is*/
 	virtual ent::EntityType getType() const;
+
+	virtual std::vector<SharedEntity> getNew(SharedResourceManager r);
 };
 
 //INLINE FUNCTIONS
 inline ent::EntityType Entity::getType() const {
 
 	return ent::STD;
+}
+
+inline std::vector<SharedEntity> Entity::getNew(SharedResourceManager r) {
+
+	std::vector<SharedEntity> v;
+
+	return v;
 }
 
 #endif

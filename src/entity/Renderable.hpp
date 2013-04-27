@@ -30,9 +30,18 @@ public:
 	/*!Renders the renderable*/
 	virtual void render() = 0;
 
+	/*!Renders any transparent shapes*/
+	virtual void renderTransparent();
+
 	/*!^INL
 	@return the type of entity this is*/
 	ent::EntityType getType() const;
+
+	util::vec::Vector3D& getPos();
+
+protected:
+
+	util::vec::Vector3D pos;
 };
 
 //INLINE FUCTIONS
@@ -40,5 +49,16 @@ inline ent::EntityType Renderable::getType() const {
 
 	return ent::RENDERABLE;
 }
+
+inline void Renderable::renderTransparent() {
+
+	//do nothing
+}
+
+inline util::vec::Vector3D& Renderable::getPos() {
+
+	return pos;
+}
+
 
 #endif

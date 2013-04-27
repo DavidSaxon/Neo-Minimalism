@@ -3,6 +3,9 @@
 //CONSTRUCTOR
 SpaceBox::SpaceBox(SharedShape s) :
     box(s) {
+
+	hasNew = false;
+	shouldRemove = false;
 }
 
 //DESTRUCTOR
