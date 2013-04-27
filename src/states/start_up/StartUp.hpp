@@ -13,6 +13,7 @@
 #include "src/Utilities/MacroUtil.hpp"
 
 #include "src/entities/start_up/Splash.hpp"
+#include "src/states/level/Level.hpp"
 #include "src/sub_engine/SubEngine.hpp"
 
 //TYPEDEF

@@ -13,7 +13,9 @@ enum Group {
 
     START_UP = 0,
     OMICRON,
-    LUDUM_DARE
+    LUDUM_DARE,
+    LEVEL,
+    BACK_GROUND
 };
 
 } //res

@@ -4,6 +4,8 @@
 StartUp::StartUp() :
 	complete(false),
 	loadCounter(0) {
+
+	exit = false;
 }
 
 //DESTRUCTOR
@@ -103,7 +105,7 @@ void StartUp::load() {
 		//TODO: free the start up resources
 
 		//set the next state
-		nextState = SharedSubEngine(new StartUp);
+		nextState = SharedSubEngine(new Level());
 		nextState->init(resourceManager, entityList, camera);
 
 		//execution is complete

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-project (Omicron)
+project (Neo-Minimalism)
 
 set(SRCS
     src/display/DisplaySurface.cpp
@@ -17,6 +17,8 @@ set(SRCS
     src/resource/utilities/PNGLoader.cpp
     src/shape/triangle/TriangleCol.cpp
     src/shape/triangle/TriangleTex.cpp
+    src/states/level/Level.cpp
+    src/states/level/Level_Event.cpp
     src/states/start_up/StartUp.cpp
     src/states/start_up/StartUp_Event.cpp
 )
@@ -33,9 +35,9 @@ include_directories("${BASEPATH}" ${INCLUDE_DIRECTORIES} ${Boost_INCLUDE_DIRS})
 
 link_directories(${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
 
-add_executable(Omicron ${SRCS})
+add_executable(Neo-Minimalism ${SRCS})
 
-target_link_libraries(Omicron
+target_link_libraries(Neo-Minimalism
     ${Boost_LIBRARIES}
 
     -lboost_system

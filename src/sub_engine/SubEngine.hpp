@@ -68,6 +68,8 @@ protected:
 
 	//the next sub engine
 	SharedSubEngine nextState;
+	//is true if the application should exit after completion
+	bool exit;
 
 	//PROTECTED MEMBER FUNCTIONS
     /*!Handles events
@@ -91,7 +93,7 @@ inline SharedSubEngine SubEngine::getNextState() {
 
 inline bool SubEngine::shouldExit() const {
 
-	return false;
+	return exit;
 }
 
 #endif

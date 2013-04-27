@@ -6,7 +6,7 @@ Splash::Splash(SharedShape s, SharedShape f) :
 	fader(boost::dynamic_pointer_cast<TriangleCol>(f)),
 	complete(false),
 	fade(1.0),
-	fadeAmount(0.01) {
+	fadeAmount(0.1) {
 }
 
 //DESTRUCTOR

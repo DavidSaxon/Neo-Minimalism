@@ -1,6 +1,6 @@
-#include "src/states/start_up/StartUp.hpp"
+#include "src/states/level/Level.hpp"
 
-void StartUp::onKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
+void Level::onKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
 
     switch (sym) {
 

@@ -126,6 +126,15 @@ void ResourceManager::createResources() {
             "res/gfx/tex/start_up/ludum_dare.png", groups));
         textures.insert(std::make_pair("ludum_dare_splash", t));
     }
+    //stars
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::BACK_GROUND);
+        SharedTextureRes t(new TextureResource(
+            "res/gfx/tex/level/background/stars_1.png", groups));
+        textures.insert(std::make_pair("stars_1", t));
+    }
 
     //add shapes
     //omicron splash
@@ -170,5 +179,15 @@ void ResourceManager::createResources() {
         SharedShapeRes s(new ShapeResource(
             "res/gfx/shapes/start_up/fader.obj", col, groups));
         shapes.insert(std::make_pair("splash_fader", s));
+    }
+    //space box
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::BACK_GROUND);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/background/space_box.obj",
+            "stars_1", groups));
+        shapes.insert(std::make_pair("space_box", s));
     }
 }
