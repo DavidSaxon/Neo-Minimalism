@@ -7,7 +7,6 @@
 #ifndef OMICRON_ENTITIES_SPLASH_H_
 #	define OMICRON_ENTITIES_SPLASH_H_
 
-
 #include "src/entity/Renderable.hpp"
 
 class Splash : public Renderable {

@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <vector>
 
+#include "src/Utilities/FileSystemUtil.hpp"
 #include "src/Utilities/StringUtil.hpp"
 
 #include "src/shape/Shape.hpp"

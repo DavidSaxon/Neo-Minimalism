@@ -100,6 +100,15 @@ SharedShape ResourceManager::getShape(const std::string& tag) {
 void ResourceManager::createResources() {
 
     //add textures
+    //uv reference
+    {
+
+        GroupList groups;
+        groups.push_back(res::ALL);
+        SharedTextureRes t(new TextureResource(
+            "res/gfx/tex/reference/uv_map_reference.png", groups));
+        textures.insert(std::make_pair("uv_map", t));
+    }
     //omicron splash
     {
         GroupList groups;
@@ -135,6 +144,26 @@ void ResourceManager::createResources() {
             "res/gfx/tex/level/background/stars_1.png", groups));
         textures.insert(std::make_pair("stars_1", t));
     }
+    //asteroid 1
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::ASTEROID);
+        SharedTextureRes t(new TextureResource(
+            "res/gfx/tex/level/asteroids/asteroid_1.png", groups));
+        textures.insert(std::make_pair("asteroid_1", t));
+    }
+    //cockpit
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::PLAYER);
+        SharedTextureRes t(new TextureResource(
+            "res/gfx/tex/level/player/cockpit.png", groups));
+        textures.insert(std::make_pair("cockpit", t));
+    }
+
+
 
     //add shapes
     //omicron splash
@@ -186,8 +215,28 @@ void ResourceManager::createResources() {
         groups.push_back(res::LEVEL);
         groups.push_back(res::BACK_GROUND);
         SharedShapeRes s(new ShapeResource(
-            "res/gfx/shapes/level/background/space_box.obj",
+            "res/gfx/shapes/level/back_ground/space_box.obj",
             "stars_1", groups));
         shapes.insert(std::make_pair("space_box", s));
+    }
+    //asteroid 1
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::ASTEROID);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/asteroids/asteroid_1.obj",
+            "asteroid_1", groups));
+        shapes.insert(std::make_pair("asteroid_1", s));
+    }
+    //cockpit
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::PLAYER);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/player/cockpit.obj",
+            "cockpit", groups));
+        shapes.insert(std::make_pair("cockpit", s));
     }
 }

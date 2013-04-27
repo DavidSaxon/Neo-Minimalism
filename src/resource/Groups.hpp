@@ -11,11 +11,14 @@ namespace res {
 
 enum Group {
 
-    START_UP = 0,
+	ALL = 0,
+    START_UP,
     OMICRON,
     LUDUM_DARE,
     LEVEL,
-    BACK_GROUND
+    BACK_GROUND,
+    ASTEROID,
+    PLAYER
 };
 
 } //res

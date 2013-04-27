@@ -5,11 +5,14 @@ Engine::Engine(SharedDisplay d, SharedSubEngine startState) :
 	display(d),
 	subEngine(startState),
 	running(false),
-	frameTime(17),
+	frameLength(33),
 	accumTime(0)
 	{
 
 	entityList = SharedEntityList(new EntityList());
+
+	//seed the random number generator
+	srand(time(0));
 }
 
 //DESTRUCTOR
@@ -39,7 +42,7 @@ void Engine::init() {
 	//TODO: create a new physics engine
 
 	//set the start time
-	startFrame = SDL_GetTicks();
+	startTime = SDL_GetTicks();
 
 	//the engine has successfully been initialised
 	running = true;
@@ -53,18 +56,23 @@ void Engine::execute() {
 		bool next = false;
 
 		//find the amount of time past since the last frame
-        long currentTime = SDL_GetTicks() - startFrame + accumTime;
+        unsigned long newTime = SDL_GetTicks();
+        unsigned frameTime =  newTime - startTime;//- startFrame + accumTime;
+        accumTime += frameTime;
+        if (accumTime > 66) {
 
-        while (currentTime >= frameTime && !next) {
+        	accumTime = 66;
+        }
+
+        while (accumTime >= frameLength && !next) {
 
 			//execute a cycle of the sub engine
 			next = subEngine->execute();
 
-			currentTime -= frameTime;
+			accumTime -= frameLength;
 		}
 
-		accumTime = currentTime;
-		startFrame = SDL_GetTicks();
+		startTime = SDL_GetTicks();
 
 		//render
 		renderer->render();

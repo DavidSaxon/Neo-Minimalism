@@ -66,6 +66,10 @@ void StartUp::load() {
 	//first stage of loading
 	if (loadCounter == 0) {
 
+		//load resources used by all
+		resourceManager->loadTextures(res::ALL);
+		resourceManager->loadShapes(res::ALL);
+
 		//load the textures needed for start up
 		resourceManager->loadTextures(res::START_UP);
 		//load the shapes needed for start up
@@ -91,6 +95,10 @@ void StartUp::load() {
 		//remove the made for splash
 		entityList->removeEntity(splash);
 
+		//load all level resources
+		resourceManager->loadTextures(res::LEVEL);
+		resourceManager->loadShapes(res::LEVEL);
+
 		//create the ludum dare splash
 		splash = SharedSplash(new Splash(
 			resourceManager->getShape("ludum_dare_splash"),
@@ -107,6 +115,9 @@ void StartUp::load() {
 		//set the next state
 		nextState = SharedSubEngine(new Level());
 		nextState->init(resourceManager, entityList, camera);
+
+		//reset the camera
+		camera->setTranslation(util::vec::Vector3D(0.0, 0.0, 0.0));
 
 		//execution is complete
 		complete = true;

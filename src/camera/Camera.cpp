@@ -16,13 +16,9 @@ Camera::~Camera() {
 
 void Camera::apply() {
 
-	//apply the transformations
 	//post-translation rotation
-	//x-axis
 	glRotatef(postRotation.getX(), 1.0, 0.0, 0.0);
-	//y-axis
 	glRotatef(postRotation.getY(), 0.0, 1.0, 0.0);
-	//z-axis
 	glRotatef(postRotation.getZ(), 0.0, 0.0, 1.0);
 	//translation
 	glTranslatef(translation.getX(), translation.getY(), translation.getZ());

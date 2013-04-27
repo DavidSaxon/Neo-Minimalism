@@ -10,6 +10,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include <iostream>
+#include <stdlib.h>
 
 #include "src/Utilities/MacroUtil.hpp"
 
@@ -66,12 +67,12 @@ private:
 	SharedResourceManager resourceManager;
 
 	//fps management
-	//the time of a frame in milliseconds
-	unsigned frameTime;
-	//the time the frame start
-	float startFrame;
-	//the accumulated time since the last frame
-	float accumTime;
+	//the time the application started
+	unsigned long startTime;
+	//the amount of time accumlated since the last frame
+	unsigned accumTime;
+	//the length of a frame in ms
+	unsigned frameLength;
 
 	//TODO: physics controller
 	//TODO: media controller

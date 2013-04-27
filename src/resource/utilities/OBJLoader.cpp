@@ -3,6 +3,12 @@
 //FUNCTIONS
 SharedShape obj_loader::loadOBJ(const std::string& path, GLuint tex) {
 
+	//check if the file exists
+	if (!util::file::fileExists(path)) {
+
+		std::cout << path << " does not exist" << std::endl;
+	}
+
 	//all the vertex coords of the shape
 	VertexCoords vCoords;
 	//all the texture coords of the shape

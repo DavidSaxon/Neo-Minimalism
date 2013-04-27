@@ -7,6 +7,7 @@
 #ifndef OMICRON_CAMERA_CAMERA_H_
 #	define OMICRON_CAMERA_CAMERA_H_
 
+#include <cmath>
 #include <GL/glx.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -14,6 +15,7 @@
 #include <SDL/SDL.h>
 
 #include "src/Utilities/MacroUtil.hpp"
+#include "src/Utilities/ValuesUtil.hpp"
 #include "src/Utilities/vector/Vector3D.hpp"
 
 class Camera {

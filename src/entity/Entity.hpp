@@ -12,8 +12,10 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <iostream>
+#include <stdlib.h>
 
 #include "src/Utilities/MacroUtil.hpp"
+#include "src/Utilities/vector/Vector3D.hpp"
 
 namespace ent {
 
