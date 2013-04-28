@@ -6,7 +6,10 @@ Player::Player(SharedShape c, SharedShape h) :
     crossHair(h),
     maxSpeed(0.03),
     currentSpeed(0.03),
-    turnSpeed(0.8) {
+    turnSpeed(0.03),
+    turnDir(0),
+    tiltAngle(5),
+    tiltSpeed(1) {
 
     hasNew = false;
     shouldRemove = false;
@@ -22,6 +25,9 @@ void Player::update() {
 
     //move the player
     move();
+
+    //tilt the player
+    tilt();
 }
 
 /*!Renders the player*/
@@ -49,44 +55,63 @@ void Player::renderTransparent() {
     glPopMatrix();
 }
 
-void Player::turnUp() {
+void Player::noTurn() {
 
-    turnRot.setX(turnRot.getX() - turnSpeed);
-}
-
-void Player::turnDown() {
-
-    turnRot.setX(turnRot.getX() + turnSpeed);
+    turnDir = 0;
 }
 
 void Player::turnLeft() {
 
-    //tiltRot.setZ(tiltRot.getZ() - leftRightTiltSpeed);
-    turnRot.setY(turnRot.getY() - turnSpeed);
+    turnDir = 1;
 }
 
 void Player::turnRight() {
 
-    //tiltRot.setZ(tiltRot.getZ() + leftRightTiltSpeed);
-    turnRot.setY(turnRot.getY() + turnSpeed);
+    turnDir = 2;
 }
 
 //PRIVATE MEMBER FUNCTIONS
 void Player::move() {
 
-    //short hand rotations
-    float x = turnRot.getX() * util::val::degreesToRadians;
-    float y = turnRot.getY() * util::val::degreesToRadians;
-    float z = turnRot.getZ() * util::val::degreesToRadians;
+    util::vec::Vector3D move(0.0, 0.0, -currentSpeed);
 
-    float rotMatrix[] = {cos(y)*cos(z), sin(x)*sin(y)*cos(z)-cos(x)*sin(z),
-        sin(x)*sin(z)+cos(x)*sin(y)*cos(z),
-        cos(y)*sin(z), cos(x)*cos(z)+sin(x)*sin(y)*sin(z),
-        cos(x)*sin(y)*sin(z)-sin(x)*cos(z),
-        -sin(y), sin(x)*cos(y), cos(x)*cos(y)};
+    if (turnDir == 1) {
 
-    util::vec::Vector3D move(-(currentSpeed * rotMatrix[2]),
-        -(currentSpeed * rotMatrix[5]), currentSpeed * rotMatrix[8]);
+        move.setX(-turnSpeed);
+    }
+    else if (turnDir == 2) {
+
+        move.setX(turnSpeed);
+    }
 
     pos += move;
+}
+
+void Player::tilt() {
+
+    if (turnDir == 0) {
+
+        if (rot.getZ() < 0) {
+
+            rot.setZ(rot.getZ() + tiltSpeed);
+        }
+        else if (rot.getZ() > 0) {
+
+            rot.setZ(rot.getZ() - tiltSpeed);
+        }
+    }
+    else if (turnDir == 1) {
+
+        if (rot.getZ() > -tiltAngle) {
+
+            rot.setZ(rot.getZ() - tiltSpeed);
+        }
+    }
+    else {
+
+        if (rot.getZ() < tiltAngle) {
+
+            rot.setZ(rot.getZ() + tiltSpeed);
+        }
+    }
 }

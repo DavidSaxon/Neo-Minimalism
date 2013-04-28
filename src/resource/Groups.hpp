@@ -19,7 +19,8 @@ enum Group {
     BACK_GROUND,
     ASTEROID,
     PLAYER,
-    LASOR
+    LASOR,
+    EFFECTS
 };
 
 } //res

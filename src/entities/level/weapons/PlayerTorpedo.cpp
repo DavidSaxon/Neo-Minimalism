@@ -2,15 +2,15 @@
 
 PlayerTorpedo::PlayerTorpedo(SharedShape s,
 	const util::vec::Vector3D& r,
-	const util::vec::Vector3D& p,
-	const util::vec::Vector3D& ms) :
+	const util::vec::Vector3D& p) :
 	torpedo(s),
 	rot(r),
-	moveSpeed(ms) {
+	moveSpeed(0.5) {
 
 	shouldRemove = false;
 	hasNew = true;
 	pos = p;
+	oPos = p;
 }
 
 PlayerTorpedo::~PlayerTorpedo() {
@@ -18,7 +18,13 @@ PlayerTorpedo::~PlayerTorpedo() {
 
 void PlayerTorpedo::update() {
 
-	pos += moveSpeed;
+	pos.setZ(pos.getZ() - moveSpeed);
+
+	//if the torpedo has traveled far destroy
+	if (fabs(pos.getZ() - oPos.getZ()) > 25) {
+
+		shouldRemove = true;
+	}
 }
 
 void PlayerTorpedo::render() {
@@ -42,6 +48,13 @@ std::vector<SharedEntity> PlayerTorpedo::getNew(SharedResourceManager r) {
 
 	v.push_back(SharedEntity(new PlayerTorpedoTrail(
 		r->getShape("player_torpedo_trail"), rot, pos)));
+
+	//add explosion
+	if (shouldRemove) {
+
+		v.push_back(SharedEntity(new Explosion(
+			r->getShape("explosion_particle"), pos, 1.0)));
+	}
 
 	return v;
 }

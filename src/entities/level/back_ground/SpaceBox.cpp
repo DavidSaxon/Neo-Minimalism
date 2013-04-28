@@ -20,7 +20,7 @@ void SpaceBox::render() {
 
     glPushMatrix();
 
-    //glTranslatef(-pos.getX(), -pos.getY(), -pos.getZ());
+    glTranslatef(pos.getX(), pos.getY(), pos.getZ());
 
     box->draw();
 

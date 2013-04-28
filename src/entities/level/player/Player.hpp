@@ -38,21 +38,11 @@ public:
 
     /*!^INL
     @return the position of the player*/
-    util::vec::Vector3D& getPos();
+    util::vec::Vector3D getPos();
 
-    /*!^INL
-    @return the tilt rotation of the player*/
-    util::vec::Vector3D getTiltRot();
+    util::vec::Vector3D& getRot();
 
-    /*!^INL
-    @return the turn rotation of the player*/
-    util::vec::Vector3D getTurnRot();
-
-    /*!turns the player up*/
-    void turnUp();
-
-    /*!turns the player down*/
-    void turnDown();
+    void noTurn();
 
     /*!turns the player to the left*/
     void turnLeft();
@@ -68,39 +58,37 @@ private:
     //the shape for the cross hairs
     SharedShape crossHair;
 
-    //the turn rotation of the player
-    util::vec::Vector3D turnRot;
-    //the tilt rotation of the player
-    util::vec::Vector3D tiltRot;
-
-    //the turn speed
-    float turnSpeed;
+    //the rotation of the player
+    util::vec::Vector3D rot;
 
     //the current speed of the player
     float currentSpeed;
+    //the speed in which the player can move side ways
+    float turnSpeed;
+    float tiltAngle;
+    float tiltSpeed;
+    //the direction the player is turning
+    unsigned turnDir;
 
     //CONSTRUCTOR
     DISALLOW_COPY_AND_ASSIGN(Player);
 
     //PRIVATE MEMBER FUNCTIONS
     void move();
+
+    void tilt();
 };
 
 //INLINE
 //PUBLIC MEMBER FUNCTIONS
-inline util::vec::Vector3D& Player::getPos() {
+inline util::vec::Vector3D Player::getPos() {
 
     return pos;
 }
 
-inline util::vec::Vector3D Player::getTiltRot() {
+inline util::vec::Vector3D& Player::getRot() {
 
-    return tiltRot;
-}
-
-inline util::vec::Vector3D Player::getTurnRot() {
-
-    return turnRot;
+    return rot;
 }
 
 #endif

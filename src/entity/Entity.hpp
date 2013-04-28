@@ -8,6 +8,7 @@
 #	define OMICRON_ENTITY_ENTITY_H_
 
 #include <boost/shared_ptr.hpp>
+#include <cmath>
 #include <GL/glx.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -58,6 +59,12 @@ public:
 	virtual ent::EntityType getType() const;
 
 	virtual std::vector<SharedEntity> getNew(SharedResourceManager r);
+
+	util::vec::Vector3D& getPos();
+
+protected:
+
+	util::vec::Vector3D pos;
 };
 
 //INLINE FUNCTIONS
@@ -71,6 +78,11 @@ inline std::vector<SharedEntity> Entity::getNew(SharedResourceManager r) {
 	std::vector<SharedEntity> v;
 
 	return v;
+}
+
+inline util::vec::Vector3D& Entity::getPos() {
+
+	return pos;
 }
 
 #endif

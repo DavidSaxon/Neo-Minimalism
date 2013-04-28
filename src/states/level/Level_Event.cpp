@@ -25,11 +25,13 @@ void Level::onKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
         case SDLK_LEFT: {
 
             leftKey = true;
+            turnDir = 1;
             break;
         }
         case SDLK_RIGHT: {
 
             rightKey = true;
+            turnDir = 2;
             break;
         }
         case SDLK_SPACE: {
@@ -63,11 +65,36 @@ void Level::onKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {
         case SDLK_LEFT: {
 
             leftKey = false;
+
+            if (rightKey) {
+
+                turnDir = 2;
+            }
+            else {
+
+                turnDir = 0;
+            }
+
             break;
         }
         case SDLK_RIGHT: {
 
             rightKey = false;
+
+            if (leftKey) {
+
+                turnDir = 1;
+            }
+            else {
+
+                turnDir = 0;
+            }
+
+            break;
+        }
+        case SDLK_SPACE: {
+
+            spaceKey = false;
             break;
         }
     }

@@ -55,12 +55,24 @@ private:
     bool rightKey;
     bool spaceKey;
 
+    unsigned turnDir;
+
     bool torpedoTime;
     bool fireLeft;
+    unsigned torP;
     float lasorSpeed;
+    unsigned lasorFireRate;
+    unsigned lasorCounter;
+    unsigned torFireRate;
+    unsigned torCounter;
 
     //CONSTRUCTOR
     DISALLOW_COPY_AND_ASSIGN(Level);
+
+    //PRIVATE MEMBER FUNCTIONS
+    void update();
+
+    void fire();
 
 //EVENT
 private:

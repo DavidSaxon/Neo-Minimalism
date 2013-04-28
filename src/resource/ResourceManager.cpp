@@ -300,11 +300,22 @@ void ResourceManager::createResources() {
     {
         GroupList groups;
         groups.push_back(res::LEVEL);
-        groups.push_back(res::LASOR);
+        groups.push_back(res::EFFECTS);
             util::vec::Vector4D col(0.0, 1.0, 1.0, 1.0);
         SharedShapeRes s(new ShapeResource(
             "res/gfx/shapes/level/lasors/player_torpedo_trail.obj",
             col, groups));
         shapes.insert(std::make_pair("player_torpedo_trail", s));
+    }
+    //player torpedo explosion particle
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::EFFECTS);
+            util::vec::Vector4D col(0.0, 1.0, 1.0, 1.0);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/effects/explosion_particle.obj",
+            col, groups));
+        shapes.insert(std::make_pair("explosion_particle", s));
     }
 }

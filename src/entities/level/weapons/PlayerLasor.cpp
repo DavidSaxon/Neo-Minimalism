@@ -1,15 +1,13 @@
 #include "src/entities/level/weapons/PlayerLasor.hpp"
 
 PlayerLasor::PlayerLasor(SharedShape s,
-	const util::vec::Vector3D& r,
-	const util::vec::Vector3D& p,
-	const util::vec::Vector3D& ms) :
+	const util::vec::Vector3D& p) :
 	lasor(s),
-	rot(r),
-	moveSpeed(ms) {
+	moveSpeed(0.5) {
 
 	hasNew = false;
 	pos = p;
+	oPos = p;
 	shouldRemove = false;
 }
 
@@ -18,7 +16,12 @@ PlayerLasor::~PlayerLasor() {
 
 void PlayerLasor::update() {
 
-	pos += moveSpeed;
+	pos.setZ(pos.getZ() - moveSpeed);
+
+	if (fabs(pos.getZ() - oPos.getZ()) > 100) {
+
+		shouldRemove = true;
+	}
 }
 
 void PlayerLasor::render() {
@@ -26,10 +29,6 @@ void PlayerLasor::render() {
 	glPushMatrix();
 
 	glTranslatef(pos.getX(), pos.getY(), pos.getZ());
-
-	glRotatef(rot.getX(), -1.0, 0.0, 0.0);
-	glRotatef(rot.getY(), 0.0, -1.0, 0.0);
-	glRotatef(rot.getZ(), 0.0, 0.0, -1.0);
 
 	lasor->draw();
 

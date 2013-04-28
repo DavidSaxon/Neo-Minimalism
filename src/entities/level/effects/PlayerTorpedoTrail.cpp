@@ -1,4 +1,4 @@
-#include "src/entities/level/weapons/PlayerTorpedoTrail.hpp"
+#include "src/entities/level/effects/PlayerTorpedoTrail.hpp"
 
 PlayerTorpedoTrail::PlayerTorpedoTrail(SharedShape s,
 	const util::vec::Vector3D& r,

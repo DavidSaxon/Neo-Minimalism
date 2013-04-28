@@ -55,8 +55,8 @@ int main(int argc, char* argv[]) {
     }
 
     //create a new display
-    //SharedDisplay display(new DisplaySurface(util::vec::Vector2D(1600, 900), false));
-    SharedDisplay display(new DisplaySurface(util::vec::Vector2D(0, 0), true));
+    SharedDisplay display(new DisplaySurface(util::vec::Vector2D(1600, 900), false));
+    //SharedDisplay display(new DisplaySurface(util::vec::Vector2D(0, 0), true));
 
     //create the start up engine
     SharedSubEngine startUp(new StartUp());

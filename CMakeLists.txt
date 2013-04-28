@@ -6,11 +6,13 @@ set(SRCS
     src/camera/Camera.cpp
     src/engine/Engine.cpp
     src/entities/level/back_ground/SpaceBox.cpp
+    src/entities/level/effects/Explosion.cpp
+    src/entities/level/effects/ExplosionParticle.cpp
+    src/entities/level/effects/PlayerTorpedoTrail.cpp
     src/entities/level/enviroment/Asteroid.cpp
     src/entities/level/player/Player.cpp
     src/entities/level/weapons/PlayerLasor.cpp
     src/entities/level/weapons/PlayerTorpedo.cpp
-    src/entities/level/weapons/PlayerTorpedoTrail.cpp
     src/entities/start_up/Splash.cpp
     src/entity_list/EntityList.cpp
     src/event/Event.cpp

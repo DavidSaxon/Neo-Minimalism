@@ -10,7 +10,13 @@ Level::Level() :
     spaceKey(false),
     fireLeft(false),
     lasorSpeed(0.5),
-    torpedoTime(false) {
+    torpedoTime(false),
+    turnDir(0),
+    torP(0),
+    lasorFireRate(6),
+    lasorCounter(0),
+    torFireRate(10),
+    torCounter(0) {
 
     exit = false;
 }
@@ -40,7 +46,16 @@ void Level::init(SharedResourceManager rm,
     entityList->addEntity(SharedEntity(
         new Asteroid(resourceManager->getShape("asteroid_1"),
         util::vec::Vector3D(0.0, 0.0, -10.0))));
-}
+    entityList->addEntity(SharedEntity(
+        new Asteroid(resourceManager->getShape("asteroid_1"),
+        util::vec::Vector3D(5.0, 0.0, -20.0))));
+    entityList->addEntity(SharedEntity(
+        new Asteroid(resourceManager->getShape("asteroid_1"),
+        util::vec::Vector3D(6.0, 0.0, -10.0))));
+    entityList->addEntity(SharedEntity(
+        new Asteroid(resourceManager->getShape("asteroid_1"),
+        util::vec::Vector3D(-4.0, 0.0, -8.0))));
+    }
 
 bool Level::execute() {
 
@@ -52,79 +67,40 @@ bool Level::execute() {
     }
 
     //move the player
-    if (upKey) {
-
-        player->turnUp();
-    }
-    if (downKey) {
-
-        player->turnDown();
-    }
-    if (leftKey) {
+    if (turnDir == 1) {
 
         player->turnLeft();
     }
-    if (rightKey) {
+    else if (turnDir == 2) {
 
         player->turnRight();
+    }
+    else {
+
+        player->noTurn();
     }
 
     //set the position of the space box to the player position
     space->setPos(player->getPos());
 
     //apply camera movement
+    camera->setPostRotation(player->getRot());
     camera->setTranslation(player->getPos());
-    camera->setPostRotation(player->getTurnRot());
+    
 
     //check for lasor firing
     if (spaceKey) {
 
-        util::vec::Vector3D lasorPos;
-
-        if (fireLeft) {
-
-            lasorPos.setX(-0.5);
-        }
-        else {
-
-            lasorPos.setX(0.5);
-        }
-
-        lasorPos += player->getPos();
-
-        //short hand rotations
-        util::vec::Vector3D playerRot = player->getTurnRot();
-        float x = playerRot.getX() * util::val::degreesToRadians;
-        float y = playerRot.getY() * util::val::degreesToRadians;
-        float z = playerRot.getZ() * util::val::degreesToRadians;
-
-        float rotMatrix[] = {cos(y)*cos(z), sin(x)*sin(y)*cos(z)-cos(x)*sin(z),
-            sin(x)*sin(z)+cos(x)*sin(y)*cos(z),
-            cos(y)*sin(z), cos(x)*cos(z)+sin(x)*sin(y)*sin(z),
-            cos(x)*sin(y)*sin(z)-sin(x)*cos(z),
-            -sin(y), sin(x)*cos(y), cos(x)*cos(y)};
-
-        util::vec::Vector3D lasorMoveSpeed(lasorSpeed * rotMatrix[2],
-            lasorSpeed * rotMatrix[5], -(lasorSpeed * rotMatrix[8]));
-
-        fireLeft = !fireLeft;
-        spaceKey = false;
-
-        if (!torpedoTime) {
-
-            entityList->addEntity(SharedEntity(
-                new PlayerLasor(resourceManager->getShape("player_lasor"),
-                player->getTurnRot(), lasorPos,
-                lasorMoveSpeed)));
-        }
-        else {
-
-            entityList->addEntity(SharedEntity(
-                new PlayerTorpedo(resourceManager->getShape("player_torpedo"),
-                player->getTurnRot(), lasorPos,
-                lasorMoveSpeed)));
-        }
+        fire();
     }
+
+    update();
+
+    return complete;
+}
+
+//PRIVATE MEMBER FUNCTIONS
+void Level::update() {
 
     EList newEntities;
     EList removeEntities;
@@ -166,6 +142,70 @@ bool Level::execute() {
 
         entityList->removeEntity(removeEntities[i]);
     }
+}
 
-    return complete;
+void Level::fire() {
+
+    if (lasorCounter == 0) {
+
+        util::vec::Vector3D lasorPos;
+
+        if (fireLeft) {
+
+            lasorPos.setX(-0.5);
+        }
+        else {
+
+            lasorPos.setX(0.5);
+        }
+
+        lasorPos += player->getPos();
+
+        fireLeft = !fireLeft;
+
+        entityList->addEntity(SharedEntity(
+                new PlayerLasor(resourceManager->getShape("player_lasor"),
+                lasorPos)));
+    }
+
+    lasorCounter = (lasorCounter + 1) % lasorFireRate;
+
+    if (torCounter == 0) {
+
+        if (torpedoTime) {
+
+            util::vec::Vector3D torPos;
+
+            if (torP == 0) {
+
+                torPos.setX(-0.5);
+                torPos.setY(-0.5);
+            }
+            else if (torP == 1) {
+
+                torPos.setX(0.5);
+                torPos.setY(0.5);
+            }
+            else if (torP == 2) {
+
+                torPos.setX(0.5);
+                torPos.setY(-0.5);
+            }
+            else {
+
+                torPos.setX(-0.5);
+                torPos.setY(0.5);
+            }
+
+            torPos += player->getPos();
+
+            torP = (torP + 1) % 4;
+
+            entityList->addEntity(SharedEntity(
+                new PlayerTorpedo(resourceManager->getShape("player_torpedo"),
+                player->getRot(), torPos)));
+        }
+    }
+
+    torCounter = (torCounter + 1) % torFireRate;
 }

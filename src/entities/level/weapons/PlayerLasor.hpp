@@ -14,9 +14,7 @@ public:
 
 	//CONSTRUCTOR
 	PlayerLasor(SharedShape s,
-		const util::vec::Vector3D& r,
-		const util::vec::Vector3D& p,
-		const util::vec::Vector3D& ms);
+		const util::vec::Vector3D& p);
 
 	~PlayerLasor();
 
@@ -27,8 +25,8 @@ public:
 private:
 
 	SharedShape lasor;
-	util::vec::Vector3D moveSpeed;
-	util::vec::Vector3D rot;
+	float moveSpeed;
+	util::vec::Vector3D oPos;
 };
 
 #endif
