@@ -25,8 +25,12 @@ private:
 	float scale;
 	float scaleRate;
 	float preScale;
-	float lessGreen;
-
+	float red;
+	float oRed;
+	float green;
+	float oGreen;
+	float blue;
+	float oBlue;
 };
 
 #endif

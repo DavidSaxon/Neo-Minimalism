@@ -314,8 +314,19 @@ void ResourceManager::createResources() {
         groups.push_back(res::EFFECTS);
             util::vec::Vector4D col(0.0, 1.0, 1.0, 1.0);
         SharedShapeRes s(new ShapeResource(
-            "res/gfx/shapes/level/effects/explosion_particle.obj",
+            "res/gfx/shapes/level/effects/explosion_particle_medium.obj",
             col, groups));
-        shapes.insert(std::make_pair("explosion_particle", s));
+        shapes.insert(std::make_pair("player_torpedo_explosion_particle", s));
+    }
+    //player lasor explosion particle
+    {
+        GroupList groups;
+        groups.push_back(res::LEVEL);
+        groups.push_back(res::EFFECTS);
+            util::vec::Vector4D col(1.0, 0.0, 0.0, 1.0);
+        SharedShapeRes s(new ShapeResource(
+            "res/gfx/shapes/level/effects/explosion_particle_small.obj",
+            col, groups));
+        shapes.insert(std::make_pair("player_lasor_explosion_particle", s));
     }
 }

@@ -13,8 +13,18 @@ ExplosionParticle::ExplosionParticle(SharedShape s,
     pos = p;
 
     preScale = (rand() % 100) / 400.0;
-    lessGreen = (rand() % 100) / 200.0;
-    lessGreen += 0.5;
+    float lessRed = (rand() % 100) / 400.0;
+    float lessGreen = (rand() % 100) / 400.0;
+    float lessBlue = (rand() % 100) / 400.0;
+
+    util::vec::Vector4D col = particle->getColour();
+
+    oRed = col.getX();
+    red = col.getX() - lessRed;
+    oGreen = col.getY();
+    green = col.getY() - lessGreen;
+    oBlue = col.getZ();
+    blue = col.getZ() - lessBlue;
 }
 
 ExplosionParticle::~ExplosionParticle() {
@@ -38,7 +48,10 @@ void ExplosionParticle::renderTransparent() {
 
     glPushMatrix();
 
-    particle->getColour().setY(lessGreen);
+
+	particle->getColour().setX(red);
+    particle->getColour().setY(green);
+    particle->getColour().setZ(blue);
 	particle->getColour().setF(1.0 - scale);
 
     glTranslatef(pos.getX(), pos.getY(), pos.getZ());
@@ -50,6 +63,10 @@ void ExplosionParticle::renderTransparent() {
 	glRotatef(rot.getZ(), 0.0, 0.0, -1.0);
 
     particle->draw();
+
+    particle->getColour().setX(oRed);
+    particle->getColour().setY(oGreen);
+    particle->getColour().setZ(oBlue);
 
     glPopMatrix();
 }

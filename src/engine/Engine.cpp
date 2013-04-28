@@ -50,6 +50,8 @@ void Engine::init() {
 
 void Engine::execute() {
 
+	PhysicsController physics(entityList);
+
 	while (running) {
 
 		//is true when the current state has finished
@@ -65,6 +67,8 @@ void Engine::execute() {
         }
 
         while (accumTime >= frameLength && !next) {
+
+        	physics.update();
 
 			//execute a cycle of the sub engine
 			next = subEngine->execute();

@@ -12,13 +12,17 @@
 
 #include "src/Utilities/MacroUtil.hpp"
 
+#include "src/entity/CollisionType.hpp"
 #include "src/entity/Renderable.hpp"
 
 //TYPEDEFS
 typedef boost::shared_ptr<Entity> SharedEntity;
+typedef boost::shared_ptr<CollisionType> SharedCollisionType;
 typedef boost::shared_ptr<Renderable> SharedRenderable;
 typedef std::vector<SharedEntity> EList;
+typedef std::vector<SharedCollisionType> CList;
 typedef std::vector<SharedRenderable> RList;
+
 
 class EntityList {
 public:
@@ -44,6 +48,11 @@ public:
 	@return the entities*/
 	EList& getEntities();
 
+	CList& getCollisions() {
+
+		return collisionList;
+	}
+
 	/*!^INL
 	@return the renderables*/
 	RList& getRenderables();
@@ -54,6 +63,7 @@ private:
 	//VARIABLES
 	//the list of  entities
 	EList entityList;
+	CList collisionList;
 	//the list of renderables
 	RList renderableList;
 

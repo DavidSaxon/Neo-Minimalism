@@ -62,6 +62,8 @@ public:
 
 	util::vec::Vector3D& getPos();
 
+	virtual bool isCollisionType() const;
+
 protected:
 
 	util::vec::Vector3D pos;
@@ -83,6 +85,11 @@ inline std::vector<SharedEntity> Entity::getNew(SharedResourceManager r) {
 inline util::vec::Vector3D& Entity::getPos() {
 
 	return pos;
+}
+
+inline bool Entity::isCollisionType() const {
+
+	return false;
 }
 
 #endif

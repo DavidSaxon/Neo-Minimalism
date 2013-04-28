@@ -17,6 +17,7 @@ set(SRCS
     src/entity_list/EntityList.cpp
     src/event/Event.cpp
     src/Main.cpp
+    src/physics/PhysicsController.cpp
     src/renderer/Renderer.cpp
     src/resource/ResourceManager.cpp
     src/resource/types/ShapeResource.cpp

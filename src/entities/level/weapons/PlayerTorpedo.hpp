@@ -3,9 +3,10 @@
 
 #include "src/entities/level/effects/Explosion.hpp"
 #include "src/entities/level/effects/PlayerTorpedoTrail.hpp"
-#include "src/entity/Renderable.hpp"
+#include "src/entity/CollisionType.hpp"
+#include "src/physics/bounding/BoundingBox.hpp"
 
-class PlayerTorpedo : public Renderable {
+class PlayerTorpedo : public CollisionType {
 public:
 
 	PlayerTorpedo(SharedShape s,
@@ -18,7 +19,14 @@ public:
 
 	void render();
 
+	void collision(col::Type t);
+
 	std::vector<SharedEntity> getNew(SharedResourceManager r);
+
+    bool isCollisionType() const {
+
+        return true;
+    }
 
 private:
 
@@ -26,6 +34,7 @@ private:
 	float moveSpeed;
 	util::vec::Vector3D oPos;
 	util::vec::Vector3D rot;
+	bool hit;
 };
 
 #endif

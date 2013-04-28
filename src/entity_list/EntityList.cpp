@@ -14,6 +14,13 @@ void EntityList::addEntity(SharedEntity entity) {
 	//add to the entity list
 	entityList.push_back(entity);
 
+    if (entity->isCollisionType()) {
+
+        collisionList.push_back(
+           boost::dynamic_pointer_cast<CollisionType>(entity));
+
+    }
+
 	//check if renderable
 	if (entity->getType() == ent::RENDERABLE) {
 
@@ -36,6 +43,22 @@ void EntityList::removeEntity(SharedEntity entity) {
         else {
 
             ++it;
+        }
+    }
+
+    if (entity->isCollisionType()) {
+
+        CList::iterator cit = collisionList.begin();
+        for (; cit != collisionList.end();) {
+
+            if (*cit == boost::dynamic_pointer_cast<CollisionType>(entity)) {
+
+                cit = collisionList.erase(cit);
+            }
+            else {
+
+                ++cit;
+            }
         }
     }
 

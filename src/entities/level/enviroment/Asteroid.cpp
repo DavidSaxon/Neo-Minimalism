@@ -6,6 +6,10 @@ Asteroid::Asteroid(SharedShape s, const util::vec::Vector3D& p) :
 
     pos = p;
 
+    bounding = SharedBounding (new BoundingBox(
+        util::vec::Vector3D(1.8, 1.8, 1.8), pos, rot));
+    type = col::ASTEROID;
+
     hasNew = false;
     shouldRemove = false;
 
@@ -41,4 +45,9 @@ void Asteroid::render() {
     asteroid->draw();
 
     glPopMatrix();
+}
+
+void Asteroid::collision(col::Type t) {
+
+    //do nothing
 }

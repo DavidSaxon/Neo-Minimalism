@@ -7,9 +7,10 @@
 #ifndef NEOMINIMALISM_ENTITIES_ENVIROMENT_ASTEROID_H_
 #   define NEOMINIMALISM_ENTITIES_ENVIROMENT_ASTEROID_H_
 
-#include "src/entity/Renderable.hpp"
+#include "src/entity/CollisionType.hpp"
+#include "src/physics/bounding/BoundingBox.hpp"
 
-class Asteroid : public Renderable {
+class Asteroid : public CollisionType {
 public:
 
     //CONSTRUCTOR
@@ -24,6 +25,13 @@ public:
 
     /*!renders the asteroid*/
     void render();
+
+    void collision(col::Type t);
+
+    bool isCollisionType() const {
+
+        return true;
+    }
 
 private:
 

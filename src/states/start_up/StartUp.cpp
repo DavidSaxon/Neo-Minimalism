@@ -30,7 +30,7 @@ void StartUp::init(SharedResourceManager rm,
 		resourceManager->getShape("splash_fader")));
 	entityList->addEntity(boost::dynamic_pointer_cast<Entity>(splash));
 
-	camera->getTranslation().setZ(-2.2);
+	camera->getTranslation().setZ(2.2);
 }
 
 bool StartUp::execute() {

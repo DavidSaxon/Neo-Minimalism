@@ -8,7 +8,7 @@ class Explosion : public Entity {
 public:
 
 	Explosion(SharedShape s, util::vec::Vector3D& p,
-		float rad);
+		float rad, unsigned am);
 
 	~Explosion();
 
@@ -22,6 +22,7 @@ private:
 	float radius;
 	unsigned aliveTime;
 	unsigned aliveCounter;
+	unsigned amount;
 };
 
 #endif

@@ -29,6 +29,8 @@ public:
 	/*!renders the entity*/
 	void render();
 
+	void renderTransparent();
+
 	/*!^INL
 	@return true once the fade has completed*/
 	bool fadeComplete() const;

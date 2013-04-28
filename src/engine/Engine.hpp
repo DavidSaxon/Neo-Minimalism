@@ -15,6 +15,7 @@
 #include "src/Utilities/MacroUtil.hpp"
 
 #include "src/display/DisplaySurface.hpp"
+#include "src/physics/PhysicsController.hpp"
 #include "src/renderer/Renderer.hpp"
 #include "src/resource/ResourceManager.hpp"
 #include "src/sub_engine/SubEngine.hpp"

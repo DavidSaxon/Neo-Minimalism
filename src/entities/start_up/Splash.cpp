@@ -34,5 +34,9 @@ void Splash::update() {
 void Splash::render() {
 
 	splash->draw();
+}
+
+void Splash::renderTransparent() {
+
 	fader->draw();
 }

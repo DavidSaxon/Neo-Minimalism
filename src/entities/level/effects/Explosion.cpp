@@ -1,9 +1,10 @@
 #include "src/entities/level/effects/Explosion.hpp"
 
 Explosion::Explosion(SharedShape s, util::vec::Vector3D& p,
-	float rad) :
+	float rad, unsigned am) :
 	particle(s),
 	radius(rad),
+	amount(am),
 	aliveTime(3),
 	aliveCounter(0) {
 
@@ -30,9 +31,7 @@ std::vector<SharedEntity> Explosion::getNew(
 
 	std::vector<SharedEntity> v;
 
-	int am = 25 - ((aliveCounter - 1) * 5);
-
-	for (int i = 0; i < am; ++i) {
+	for (int i = 0; i < amount; ++i) {
 
 		//generate random distance from centre
 		float dis = (rand() % 100) / 100.0;

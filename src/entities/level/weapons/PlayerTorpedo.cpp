@@ -5,12 +5,17 @@ PlayerTorpedo::PlayerTorpedo(SharedShape s,
 	const util::vec::Vector3D& p) :
 	torpedo(s),
 	rot(r),
-	moveSpeed(0.5) {
+	moveSpeed(0.5),
+	hit(false) {
 
 	shouldRemove = false;
 	hasNew = true;
 	pos = p;
 	oPos = p;
+
+    bounding = SharedBounding (new BoundingBox(
+        util::vec::Vector3D(0.08, 0.08, 0.08), pos, rot));
+    type = col::PLAYER_TORPEDO;
 }
 
 PlayerTorpedo::~PlayerTorpedo() {
@@ -18,13 +23,26 @@ PlayerTorpedo::~PlayerTorpedo() {
 
 void PlayerTorpedo::update() {
 
-	pos.setZ(pos.getZ() - moveSpeed);
-
-	//if the torpedo has traveled far destroy
-	if (fabs(pos.getZ() - oPos.getZ()) > 25) {
+	if (hit) {
 
 		shouldRemove = true;
+		
+		pos.setZ(pos.getZ() + 2 * moveSpeed);
 	}
+	else {
+
+		pos.setZ(pos.getZ() - moveSpeed);
+
+		//if the torpedo has traveled far destroy
+		if (fabs(pos.getZ() - oPos.getZ()) > 100) {
+
+			shouldRemove = true;
+		}
+
+		bounding->setPos(pos);
+	}
+
+
 }
 
 void PlayerTorpedo::render() {
@@ -42,6 +60,14 @@ void PlayerTorpedo::render() {
 	glPopMatrix();
 }
 
+void PlayerTorpedo::collision(col::Type t) {
+
+	if (t == col::ASTEROID) {
+
+		hit = true;
+	}
+}
+
 std::vector<SharedEntity> PlayerTorpedo::getNew(SharedResourceManager r) {
 
 	std::vector<SharedEntity> v;
@@ -53,7 +79,7 @@ std::vector<SharedEntity> PlayerTorpedo::getNew(SharedResourceManager r) {
 	if (shouldRemove) {
 
 		v.push_back(SharedEntity(new Explosion(
-			r->getShape("explosion_particle"), pos, 1.0)));
+			r->getShape("player_torpedo_explosion_particle"), pos, 0.1, 50)));
 	}
 
 	return v;
