@@ -29,6 +29,8 @@ typedef boost::shared_ptr<SubEngine> SharedSubEngine;
 class SubEngine : public Event {
 public:
 
+	bool pause;
+
 	//DESTRUCTOR
 	/*!Destroys the sub engine
 	^INL*/

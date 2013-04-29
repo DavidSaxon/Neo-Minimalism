@@ -8,7 +8,7 @@ class Explosion : public Entity {
 public:
 
 	Explosion(SharedShape s, util::vec::Vector3D& p,
-		float rad, unsigned am);
+		float rad, unsigned am, bool l = false);
 
 	~Explosion();
 

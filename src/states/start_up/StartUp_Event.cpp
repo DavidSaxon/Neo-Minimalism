@@ -12,6 +12,18 @@ void StartUp::onKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
             exit = true;
             break;
         }
+        case SDLK_RETURN: {
+
+        	if (atTitle) {
+
+        		entityList->removeEntity(splash);
+        		complete = true;
+				nextState = SharedSubEngine(new Level());
+				nextState->init(resourceManager, entityList, camera);
+                Mix_HaltChannel(musicChannel);
+        	}
+        	break;
+        }
     }
 
 }

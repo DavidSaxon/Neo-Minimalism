@@ -1,6 +1,8 @@
 #ifndef NEOMINIMALISM_ENTITIES_LEVEL_WEAPONS_PLAYERTORPEDO_H_
 #	define NEOMINIMALISM_ENTITIES_LEVEL_WEAPONS_PLAYERTORPEDO_H_
 
+#include "src/Utilities/ValuesUtil.hpp"
+
 #include "src/entities/level/effects/Explosion.hpp"
 #include "src/entities/level/effects/PlayerTorpedoTrail.hpp"
 #include "src/entity/CollisionType.hpp"
@@ -11,7 +13,8 @@ public:
 
 	PlayerTorpedo(SharedShape s,
 		const util::vec::Vector3D& r,
-		const util::vec::Vector3D& p);
+		const util::vec::Vector3D& p,
+		bool u);
 
 	~PlayerTorpedo();
 
@@ -28,6 +31,11 @@ public:
         return true;
     }
 
+	int getDamage() {
+
+		return 5;
+	}
+
 private:
 
 	SharedShape torpedo;
@@ -35,6 +43,12 @@ private:
 	util::vec::Vector3D oPos;
 	util::vec::Vector3D rot;
 	bool hit;
+	bool goDown;
+	bool goUp;
+	bool up;
+	bool goStraight;
+
+	void move();
 };
 
 #endif

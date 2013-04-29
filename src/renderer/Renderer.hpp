@@ -9,6 +9,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include <iostream>
+#include <SDL/SDL_mixer.h>
 
 #include "src/Utilities/MacroUtil.hpp"
 #include "src/Utilities/vector/Vector4D.hpp"

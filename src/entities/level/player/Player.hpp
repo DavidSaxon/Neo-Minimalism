@@ -11,17 +11,20 @@
 
 #include "src/Utilities/ValuesUtil.hpp"
 
-#include "src/entity/Renderable.hpp"
+#include "src/entity/CollisionType.hpp"
+#include "src/physics/bounding/BoundingBox.hpp"
 
-class Player : public Renderable {
+class Player : public CollisionType {
 public:
 
     //VARIABLES
     //the max speed of the player
     const float maxSpeed;
+    bool torpedo;
+    bool dead;
 
     //CONSTRUCTOR
-    Player(SharedShape c, SharedShape h);
+    Player(SharedShape c, SharedShape h, SharedShape f);
 
     //DESTRUCTOR
     ~Player();
@@ -50,6 +53,13 @@ public:
     /*!turns the player to the right*/
     void turnRight();
 
+    void collision(col::Type t);
+
+    bool isCollisionType() const {
+
+        return true;
+    }
+
 private:
 
     //VARIABLES
@@ -57,6 +67,7 @@ private:
     SharedShape cockpit;
     //the shape for the cross hairs
     SharedShape crossHair;
+    SharedTriangleCol fader;
 
     //the rotation of the player
     util::vec::Vector3D rot;
@@ -69,6 +80,14 @@ private:
     float tiltSpeed;
     //the direction the player is turning
     unsigned turnDir;
+
+    int health;
+    int maxHealth;
+
+    unsigned torpedoTime;
+    int torpedoCounter;
+
+    float fade;
 
     //CONSTRUCTOR
     DISALLOW_COPY_AND_ASSIGN(Player);

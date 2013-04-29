@@ -6,6 +6,8 @@ StartUp::StartUp() :
 	loadCounter(0) {
 
 	exit = false;
+	pause = false;
+	atTitle = false;
 }
 
 //DESTRUCTOR
@@ -31,6 +33,16 @@ void StartUp::init(SharedResourceManager rm,
 	entityList->addEntity(boost::dynamic_pointer_cast<Entity>(splash));
 
 	camera->getTranslation().setZ(2.2);
+
+    sound = Mix_LoadWAV("res/sound/music/imminent_war.wav");
+    if(sound == NULL) {
+        fprintf(stderr, "Unable to load WAV file: %s\n", Mix_GetError());
+    }
+     
+    musicChannel = Mix_PlayChannel(-1, sound, -1);
+    if(musicChannel == -1) {
+        fprintf(stderr, "Unable to play WAV file: %s\n", Mix_GetError());
+    }
 }
 
 bool StartUp::execute() {
@@ -57,6 +69,8 @@ bool StartUp::execute() {
 		(*it)->update();
 	}
 
+	//std::cout << complete << std::endl;
+
 	return complete;
 }
 
@@ -80,6 +94,9 @@ void StartUp::load() {
 		//remove the omicron splash
 		entityList->removeEntity(splash);
 
+			resourceManager->loadTextures(res::LEVEL);
+		resourceManager->loadShapes(res::LEVEL);
+
 		//free the omicron resources
 		//TODO:
 
@@ -96,8 +113,6 @@ void StartUp::load() {
 		entityList->removeEntity(splash);
 
 		//load all level resources
-		resourceManager->loadTextures(res::LEVEL);
-		resourceManager->loadShapes(res::LEVEL);
 
 		//create the ludum dare splash
 		splash = SharedSplash(new Splash(
@@ -110,17 +125,16 @@ void StartUp::load() {
 		//remove the ludum dare splash
 		entityList->removeEntity(splash);
 
-		//TODO: free the start up resources
+		splash = SharedSplash(new Splash(
+			resourceManager->getShape("title"),
+			resourceManager->getShape("splash_fader")));
+		entityList->addEntity(boost::dynamic_pointer_cast<Entity>(splash));
 
-		//set the next state
-		nextState = SharedSubEngine(new Level());
-		nextState->init(resourceManager, entityList, camera);
+		atTitle = true;
+	}
+	else {
 
-		//reset the camera
-		camera->setTranslation(util::vec::Vector3D(0.0, 0.0, 0.0));
-
-		//execution is complete
-		complete = true;
+		return;
 	}
 
 	//increment the load counter

@@ -14,7 +14,17 @@ namespace col {
 
 		ASTEROID = 0,
 		PLAYER_LASOR,
-		PLAYER_TORPEDO
+		PLAYER_TORPEDO,
+		PLAYER,
+		FLYER,
+		HEALTH,
+		MISSLE,
+		INTERCEPTOR,
+		ENEMY_LASOR,
+		STATION,
+		DRONE,
+		ENEMY_TORPEDO,
+		BOSS
 	};
 }
 
@@ -31,6 +41,11 @@ public:
 	col::Type getType() {
 
 		return type;
+	}
+
+	virtual int getDamage() {
+
+		return 0;
 	}
 
 protected:

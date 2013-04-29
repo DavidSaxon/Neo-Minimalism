@@ -57,6 +57,13 @@ public:
 	@return the renderables*/
 	RList& getRenderables();
 
+	void clear() {
+
+		entityList.clear();
+		collisionList.clear();
+		renderableList.clear();
+	}
+
 
 private:
 

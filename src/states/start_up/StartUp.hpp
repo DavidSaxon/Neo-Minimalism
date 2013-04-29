@@ -9,6 +9,7 @@
 #	define OMICRON_STATES_STARTUP_STARTUP_H_
 
 #include <iostream>
+#include <SDL/SDL_mixer.h>
 
 #include "src/Utilities/MacroUtil.hpp"
 
@@ -49,6 +50,11 @@ private:
 	bool complete;
 	//counts the stages of loading
 	unsigned loadCounter;
+
+	bool atTitle;
+
+	Mix_Chunk* sound;
+	int musicChannel;
 
 	//the splash screen
 	SharedSplash splash;

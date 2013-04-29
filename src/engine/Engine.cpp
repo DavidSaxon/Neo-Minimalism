@@ -33,7 +33,7 @@ void Engine::init() {
 
 	//create a new renderer
 	renderer = SharedRenderer(new Renderer(entityList, display,
-		camera, util::vec::Vector4D(0.0, 0.0, 0.0, 1.0), 200.0));
+		camera, util::vec::Vector4D(0.0, 0.0, 0.0, 1.0), 500.0));
 	renderer->init();
 
 	//initialise the sub engine
@@ -68,7 +68,10 @@ void Engine::execute() {
 
         while (accumTime >= frameLength && !next) {
 
-        	physics.update();
+        	if (!subEngine->pause) {
+
+        		physics.update();
+    		}
 
 			//execute a cycle of the sub engine
 			next = subEngine->execute();
@@ -80,6 +83,20 @@ void Engine::execute() {
 
 		//render
 		renderer->render();
+
+    	if (subEngine->pause) {
+
+    		glPushMatrix();
+
+    		glLoadIdentity();
+
+    		resourceManager->getShape("pause")->draw();
+
+    		glPopMatrix();
+		}
+
+	    //swap the buffers
+    	SDL_GL_SwapBuffers();
 
 		//the current state is complete
 		if (next) {

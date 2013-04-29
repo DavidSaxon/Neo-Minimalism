@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <vector>
 
+#include "src/Utilities/ValuesUtil.hpp"
+
 #include "src/Utilities/MacroUtil.hpp"
 #include "src/Utilities/vector/Vector3D.hpp"
 

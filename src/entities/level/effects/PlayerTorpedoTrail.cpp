@@ -5,7 +5,7 @@ PlayerTorpedoTrail::PlayerTorpedoTrail(SharedShape s,
 	const util::vec::Vector3D& p) :
 	trail(boost::dynamic_pointer_cast<TriangleCol>(s)),
 	rot(r),
-	fade(1.0),
+	fade(0.6),
 	fadeAmount(0.03) {
 
 	shouldRemove = false;

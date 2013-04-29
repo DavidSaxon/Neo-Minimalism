@@ -55,9 +55,6 @@ void Renderer::render() {
 
         entityList->getRenderables()[i]->renderTransparent();
     }
-
-    //swap the buffers
-    SDL_GL_SwapBuffers();
 }
 
 //PRIVATE MEMBER FUNCTIONS
@@ -79,6 +76,16 @@ void Renderer::initSDL() {
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
 
         throw omiEx::SDLInitException("SDL audio initialisation failure");
+    }
+
+    int audio_rate = 22050;
+    Uint16 audio_format = AUDIO_S16SYS;
+    int audio_channels = 2;
+    int audio_buffers = 4096;
+
+    if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) != 0) {
+        fprintf(stderr, "Unable to initialize audio: %s\n", Mix_GetError());
+        exit(1);
     }
 }
 

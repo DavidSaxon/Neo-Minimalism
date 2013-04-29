@@ -33,6 +33,11 @@ public:
         return true;
     }
 
+	int getDamage() {
+
+		return 1;
+	}
+
 private:
 
 	SharedShape lasor;

@@ -5,14 +5,25 @@ set(SRCS
     src/display/DisplaySurface.cpp
     src/camera/Camera.cpp
     src/engine/Engine.cpp
+    src/entities/level/back_ground/BelowPlanet.cpp
     src/entities/level/back_ground/SpaceBox.cpp
     src/entities/level/effects/Explosion.cpp
     src/entities/level/effects/ExplosionParticle.cpp
     src/entities/level/effects/PlayerTorpedoTrail.cpp
+    src/entities/level/enemy/Flyer.cpp
+    src/entities/level/enemy/Interceptor.cpp
+    src/entities/level/enemy/Station.cpp
+    src/entities/level/enemy/Drone.cpp
+    src/entities/level/enemy/Boss.cpp
     src/entities/level/enviroment/Asteroid.cpp
+    src/entities/level/enviroment/Wall.cpp
+    src/entities/level/pick_ups/Health.cpp
+    src/entities/level/pick_ups/Missle.cpp
     src/entities/level/player/Player.cpp
+    src/entities/level/weapons/EnemyLasor.cpp
     src/entities/level/weapons/PlayerLasor.cpp
     src/entities/level/weapons/PlayerTorpedo.cpp
+    src/entities/level/weapons/EnemyTorpedo.cpp
     src/entities/start_up/Splash.cpp
     src/entity_list/EntityList.cpp
     src/event/Event.cpp
@@ -59,4 +70,5 @@ target_link_libraries(Neo-Minimalism
     -lm
     -lpng
     -lSDL
+    -lSDL_mixer
 )

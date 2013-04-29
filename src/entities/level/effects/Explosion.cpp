@@ -1,12 +1,17 @@
 #include "src/entities/level/effects/Explosion.hpp"
 
 Explosion::Explosion(SharedShape s, util::vec::Vector3D& p,
-	float rad, unsigned am) :
+	float rad, unsigned am, bool l) :
 	particle(s),
 	radius(rad),
 	amount(am),
 	aliveTime(3),
 	aliveCounter(0) {
+
+	if (l) {
+
+		aliveTime = 20;
+	}
 
     hasNew = true;
     shouldRemove = false;

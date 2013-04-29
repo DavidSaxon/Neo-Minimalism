@@ -3,7 +3,7 @@
 PlayerLasor::PlayerLasor(SharedShape s,
 	const util::vec::Vector3D& p) :
 	lasor(s),
-	moveSpeed(0.5) {
+	moveSpeed(1.0) {
 
 	hasNew = false;
 	pos = p;
@@ -33,9 +33,10 @@ void PlayerLasor::update() {
 
 		pos.setZ(pos.getZ() - moveSpeed);
 
-		if (fabs(pos.getZ() - oPos.getZ()) > 100) {
+		if (fabs(pos.getZ() - oPos.getZ()) > 50) {
 
 			shouldRemove = true;
+			hasNew = true;
 		}
 
 		bounding->setPos(pos);
@@ -55,7 +56,8 @@ void PlayerLasor::render() {
 
 void PlayerLasor::collision(col::Type t) {
 
-	if (t == col::ASTEROID) {
+	if (t != col::PLAYER && t != col::PLAYER_TORPEDO &&
+		t != col::PLAYER_LASOR) {
 
 		hit = true;
 	}
@@ -66,7 +68,7 @@ std::vector<SharedEntity> PlayerLasor::getNew(SharedResourceManager r) {
 	std::vector<SharedEntity> v;
 
 	v.push_back(SharedEntity(new Explosion(
-		r->getShape("player_lasor_explosion_particle"), pos, 0.05, 25)));
+		r->getShape("player_lasor_explosion_particle"), pos, 0.05, 10)));
 
 	return v;
 }

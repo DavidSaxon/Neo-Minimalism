@@ -1,18 +1,30 @@
 #include "src/entities/level/player/Player.hpp"
 
 //CONSTRUCTOR
-Player::Player(SharedShape c, SharedShape h) :
+Player::Player(SharedShape c, SharedShape h, SharedShape f) :
     cockpit(c),
     crossHair(h),
-    maxSpeed(0.03),
-    currentSpeed(0.03),
-    turnSpeed(0.03),
+    fader(boost::dynamic_pointer_cast<TriangleCol>(f)),
+    maxSpeed(0.3),
+    currentSpeed(0.3),
+    turnSpeed(0.3),
     turnDir(0),
     tiltAngle(5),
-    tiltSpeed(1) {
+    tiltSpeed(0.5),
+    health(100),
+    maxHealth(100),
+    dead(false),
+    fade(1.0) {
 
     hasNew = false;
     shouldRemove = false;
+    torpedo = false;
+    torpedoTime = 500;
+    torpedoCounter = 0;
+
+    bounding = SharedBounding (new BoundingBox(
+        util::vec::Vector3D(0.5, 0.5, 3.0), pos, rot));
+    type = col::PLAYER;
 }
 
 //DESTRUCTOR
@@ -24,35 +36,126 @@ Player::~Player() {
 void Player::update() {
 
     //move the player
-    move();
+    if (!dead) {
+
+        move();
+    }
 
     //tilt the player
     tilt();
+
+    if (torpedoCounter == 0) {
+
+        torpedo = false;
+    }
+    else {
+
+        --torpedoCounter;
+    }
+
+    if (health <= 0) {
+
+        dead = true;
+    }
+
+    if (fade > 0) {
+
+        fader->getColour().setF(fade);
+
+        fade -= 0.02;
+    }
 }
 
 /*!Renders the player*/
 void Player::render() {
 
-    glPushMatrix();
+    if (!dead) {
 
-    glLoadIdentity();
+        glPushMatrix();
 
-    glTranslatef(0.0, 0.0, 0.45);
+        glLoadIdentity();
 
-    cockpit->draw();
+        //draw the health bar
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glColor4f(1.0 - (health / 100.0), (health / 100.0), 0, 1.0);
 
-    glPopMatrix();
+        glBegin(GL_TRIANGLES);
+
+        float length = 0.03 * (health / 100.0);
+
+        glVertex3f(-length, 0.038, -0.1);
+        glVertex3f(-length, 0.035, -0.1);
+        glVertex3f( length, 0.038, -0.1);
+
+        glVertex3f( length, 0.035, -0.1);
+        glVertex3f( length, 0.038, -0.1);
+        glVertex3f(-length, 0.035, -0.1);
+
+        glEnd();
+
+        glTranslatef(0.0, 0.0, 0.45);
+
+        cockpit->draw();
+
+        glPopMatrix();
+    }
 }
 
 void Player::renderTransparent() {
 
-    glPushMatrix();
+    if (!dead) {
 
-    glLoadIdentity();
+        glPushMatrix();
 
-    crossHair->draw();
+        glLoadIdentity();
 
-    glPopMatrix();
+        crossHair->draw();
+
+        if (fade > 0) {
+
+            fader->draw();
+        }
+
+        glPopMatrix();
+    }
+}
+
+void Player::collision(col::Type t) {
+
+    if (t == col::ASTEROID) {
+
+        health = 0;
+    }
+    if (t == col::FLYER || t == col::INTERCEPTOR || t == col::DRONE) {
+
+        health -= 10;
+    }
+    if (t == col::HEALTH) {
+
+        health += 100;
+
+        if (health > maxHealth) {
+
+            health = maxHealth;
+        }
+    }
+    if (t == col::MISSLE) {
+
+        torpedo = true;
+        torpedoCounter = torpedoTime;
+    }
+    if (t == col::ENEMY_LASOR) {
+
+        health -= 3;
+    }
+    if (t == col::ENEMY_TORPEDO) {
+
+        health -= 6;
+    }
+    if (t == col::STATION) {
+
+        health -= 25;
+    }
 }
 
 void Player::noTurn() {
@@ -77,14 +180,22 @@ void Player::move() {
 
     if (turnDir == 1) {
 
-        move.setX(-turnSpeed);
+        if (pos.getX() >= -14.2) {
+
+            move.setX(-turnSpeed);
+        }
     }
     else if (turnDir == 2) {
 
-        move.setX(turnSpeed);
+        if (pos.getX() <= 14.2) {
+
+            move.setX(turnSpeed);
+        }
     }
 
     pos += move;
+
+    bounding->setPos(pos);
 }
 
 void Player::tilt() {
