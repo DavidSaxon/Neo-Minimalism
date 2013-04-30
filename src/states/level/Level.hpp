@@ -7,6 +7,7 @@
 #ifndef NEOMINIMALISM_STATES_LEVEL_H_
 #   define NEOMINIMALISM_STATES_LEVEL_H_
 
+#include <boost/shared_ptr>
 #include <SDL/SDL_mixer.h>
 #include <fstream>
 

@@ -21,7 +21,7 @@ Level::Level() :
     restarting(false),
     lastZ(0),
     stage(0),
-    bossFight(false) {
+    bossFight(false){
 
     pause = false;
     exit = false;
@@ -509,8 +509,6 @@ void Level::create() {
 }
 
 void Level::buildLevel(std::string filename) {
-
-    std::cout << stage << std::endl;
 
     std::ifstream inFile(filename.c_str());
 
